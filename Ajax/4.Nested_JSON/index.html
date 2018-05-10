@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Nested</title>
+</head>
+<body>
+  <button onclick="data_JSON()">Search</button>
+  <div id="info"></div>
+  <script>
+      var xhr,
+          resultado = document.getElementById("info");
+
+      function data_JSON() {
+        if (window.XMLHttpRequest) {
+          xhr = new XMLHttpRequest();
+        }else {
+          xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState === 4 && xhr.status ===200) {
+              // Convertir a objeto json
+              var datos = JSON.parse(xhr.responseText);
+
+              if (resultado.innerHTML === "") {
+                for(var i in datos) {
+
+                resultado.innerHTML += "<H5>" + i + "</H5>";
+
+                var persona = datos[i]
+                 for(var j in persona){
+                   resultado.innerHTML += j + ": " + persona[j] + "<br>";
+                 }
+                }
+              }
+            }
+
+          }
+          xhr.open("GET","date.json",true);
+          xhr.send();
+        }
+
+  </script>
+</body>
+</html>

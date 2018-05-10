@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ParseStringify</title>
+</head>
+<body>
+  <div id="info"></div>
+  <script>
+    var cadenaJson = '{"nombre":"Luis","apellido":"Gomez","edad":20,"salario":2000}';
+
+    // document.write(typeof cadenaJson);
+
+  var personaJSON = JSON.parse(cadenaJson);
+
+  // document.write(typeof personaJSON); object
+
+  var stringJSON = JSON.stringify(personaJSON);
+  document.write(typeof stringJSON) //cadena
+
+
+  </script>
+</body>
+</html>

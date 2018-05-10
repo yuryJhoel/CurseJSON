@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ejmploMenor</title>
+</head>
+<body>
+  <button onclick="ajax_json()">Click</button>
+  <div id="info"></div>
+
+  <script>
+    var resultado = document.getElementById("info");
+
+    function ajax_json() {
+      var xhr;
+      if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+      }else {
+        // alert("hola")
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200 ) {
+            var datos = JSON.parse(xhr.responseText),
+                edMenor = encontrarEdadMenor(datos);
+              resultado.innerHTML = "La edad mayor es: " + edMenor;
+          }
+        }
+        xhr.open("GET","datos.json",true);
+        xhr.send();
+    }
+
+    function encontrarEdadMenor(objectJSON) {
+      var arreglo = [];
+      for(var i in objectJSON) {
+        var persona = objectJSON[i];
+            arreglo.push(persona.edad)
+      }
+      // var edadM = arreglo[0];
+      //
+      // for(var j = 0 ; j < arreglo.length; j++){
+      //   if (arreglo[j] < edadM) {
+      //     edadM = arreglo[j];
+      //   }
+      // }
+      var edadM = Math.max.apply(null,arreglo);
+      return edadM
+    }
+
+  </script>
+</body>
+</html>
